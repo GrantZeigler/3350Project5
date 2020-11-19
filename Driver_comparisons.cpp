@@ -1,4 +1,4 @@
-/*
+
 #include "allAlgorithms.h"
 #include "number_data.h"
 #include <fstream>
@@ -86,17 +86,38 @@ int main()
 	out << "8000: 64000000 > 64000000 > 8000 > " << bubbleSort(eightKRevCopy, 8000) << " > " << bubbleSort(eightKRandCopy, 8000) << " > " << bubbleSort(eightKAscendCopy, 8000) << endl;
 
 	copyAllThoseArrays();
-	out  << endl;
 
 	out << "Insertion Sort Information: " << endl;
 	out << "1000: 1000000 > 1000000 > 1000 > " << insertionSort(oneKRevCopy, 1000) << " > " << insertionSort(oneKRandCopy, 1000) << endl;
 	out << "2000: 4000000 > 4000000 > 2000 > " << insertionSort(twoKRevCopy, 2000) << " > " << insertionSort(twoKRandCopy, 2000) << endl;
 	out << "4000: 16000000 > 16000000 > 4000 > " << insertionSort(fourKRevCopy, 4000) << " > " << insertionSort(fourKRandCopy, 4000) << endl;
 	out << "8000: 64000000 > 64000000 > 8000 > " << insertionSort(eightKRevCopy, 8000) << " > " << insertionSort(eightKRandCopy, 8000) << " > " << insertionSort(eightKAscendCopy, 8000) << endl;
+	
+	copyAllThoseArrays();
+	//out << "Quick Sort Information: " << endl;
+	//out << "1000: 3000 > 3000 > 3000 > " << quicksort(oneKRevCopy, 1000, 0) << " > " << quicksort(oneKRandCopy, 1000, 0) << endl;
+	//out << "2000: 6602 > 6602 > 6602 > " << quicksort(twoKRevCopy, 2000, 0) << " > " << quicksort(twoKRandCopy, 2000, 0) << endl;
+	//out << "4000: 14408 > 14408 > 14408 > " << quicksort(fourKRevCopy, 4000, 0) << " > " << quicksort(fourKRandCopy, 4000, 0) << endl;
+	//out << "8000: 31224 > 31224 > 31224 > " << quicksort(eightKRevCopy, 8000, 0) << " > " << quicksort(eightKRandCopy, 8000, 0) << " > " << quicksort(eightKAscendCopy, 8000, 1) << endl;
+
+
+	copyAllThoseArrays();
+	out << "Heap Sort Information: " << endl;
+	out << "1000: 3000 > 3000 > 3000 > " << heapsort(oneKRevCopy, 1000) << " > " << heapsort(oneKRandCopy, 1000) << endl;
+	out << "2000: 6602 > 6602 > 6602 > " << heapsort(twoKRevCopy, 2000) << " > " << heapsort(twoKRandCopy, 2000) << endl;
+	out << "4000: 14408 > 14408 > 14408 > " << heapsort(fourKRevCopy, 4000) << " > " << heapsort(fourKRandCopy, 4000) << endl;
+	out << "8000: 31224 > 31224 > 31224 > " << heapsort(eightKRevCopy, 8000) << " > " << heapsort(eightKRandCopy, 8000) << " > " << heapsort(eightKAscendCopy, 8000) << endl;
+	
+	copyAllThoseArrays();
+	out << "Merge Sort Information: " << endl;
+	out << "1000: 3000 > 3000 > 3000 > " << mergesort(oneKRevCopy, 1000) << " > " << mergesort(oneKRandCopy, 1000) << endl;
+	out << "2000: 6602 > 6602 > 6602 > " << mergesort(twoKRevCopy, 2000) << " > " << mergesort(twoKRandCopy, 2000) << endl;
+	out << "4000: 14408 > 14408 > 14408 > " << mergesort(fourKRevCopy, 4000) << " > " << mergesort(fourKRandCopy, 4000) << endl;
+	out << "8000: 31224 > 31224 > 31224 > " << mergesort(eightKRevCopy, 8000) << " > " << mergesort(eightKRandCopy, 8000) << " > " << mergesort(eightKAscendCopy, 8000) << endl;
 
 
 
 	out.close();
 	return 0;
 }
-*/
+

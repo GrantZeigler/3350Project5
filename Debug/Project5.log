@@ -1,2 +1,5 @@
-﻿  Driver_comparisons.cpp
+﻿  allAlgorithms.cpp
+C:\Users\gzeigle\Desktop\Project5\Project5\allAlgorithms.cpp(44,26): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\gzeigle\Desktop\Project5\Project5\allAlgorithms.cpp(46,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\gzeigle\Desktop\Project5\Project5\allAlgorithms.cpp(68,16): warning C4018:  '<': signed/unsigned mismatch
   Project5.vcxproj -> C:\Users\gzeigle\Desktop\Project5\Debug\Project5.exe

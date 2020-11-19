@@ -63,7 +63,7 @@ int bubbleSort(int array[], size_t size)
 //CODE SOURCED FROM: https://www.geeksforgeeks.org/insertion-sort/
 int insertionSort(int arr[], size_t n)
 {
-	int comparisons = 0;
+	int comps = 0;
 	int i, key, j;
 	for (i = 1; i < n; i++)
 	{
@@ -75,18 +75,42 @@ int insertionSort(int arr[], size_t n)
 		of their current position */
 		while (j >= 0 && arr[j] > key)
 		{
-			comparisons++;
+			comps++;
+
 			arr[j + 1] = arr[j];
 			j = j - 1;
 		}
 		arr[j + 1] = key;
 	}
-	return comparisons;
+	return comps;
 }
 
 
 //QUICK SORT
-void partition(int data[], size_t n, size_t& pivot_index, int comparisons)
+int quicksort(int data[], size_t n, int comps)
+// Library facilities used: cstdlib
+{
+	size_t pivot_index; // Array index for the pivot element
+	size_t n1;          // Number of elements before the pivot element
+	size_t n2;          // Number of elements after the pivot element
+
+	if (n > 1)
+	{
+		// Partition the array, and set the pivot index.
+		partition(data, n, pivot_index, comps);
+
+		// Compute the sizes of the subarrays.
+		n1 = pivot_index;
+		n2 = n - n1 - 1;
+
+		// Recursive calls will now sort the subarrays.
+		comps += quicksort(data, n1, comps);
+		comps += quicksort((data + pivot_index + 1), n2, comps);
+	}
+	return comps;
+}
+
+int partition(int data[], size_t n, size_t& pivot_index, int comps)
 // Library facilities used: itemtool.h, stdlib.h
 //
 // NOTES FROM THE IMPLEMENTOR:
@@ -111,6 +135,7 @@ void partition(int data[], size_t n, size_t& pivot_index, int comparisons)
 //    (leaving data[1] alone). Thus, the smaller element (the pivot) remains
 //    at data[0], leaving the larger element at data[1].
 {
+	// -- Implementation is left to the student
 	int pivot = data[0]; // May be changed to median-of-three pivoting
 	size_t too_big_index = 1;
 	size_t too_small_index = n - 1;
@@ -124,42 +149,23 @@ void partition(int data[], size_t n, size_t& pivot_index, int comparisons)
 		while (data[too_small_index] > pivot)
 		{
 			too_small_index--;
-		}
-		comparisons++;
+		};
+
+		comps++;
 		if (too_big_index < too_small_index)
-		{
+		{ 
 			swap(data[too_big_index], data[too_small_index]);
-		}
+		};
 	};
 
 	pivot_index = too_small_index;
 	data[0] = data[pivot_index];
 	data[pivot_index] = pivot;
+
+	return comps;
 }
 
-int quicksort(int data[], size_t n)
-// Library facilities used: cstdlib
-{
-	int comparisons = 0;
-	size_t pivot_index; // Array index for the pivot element
-	size_t n1;          // Number of elements before the pivot element
-	size_t n2;          // Number of elements after the pivot element
 
-	if (n > 1)
-	{
-		// Partition the array, and set the pivot index.
-		partition(data, n, pivot_index, comparisons);
-
-		// Compute the sizes of the subarrays.
-		n1 = pivot_index;
-		n2 = n - n1 - 1;
-
-		// Recursive calls will now sort the subarrays.
-		quicksort(data, n1);
-		quicksort((data + pivot_index + 1), n2);
-	}
-	return comparisons;
-}
 
 //HEAP SORT
 size_t parent(size_t k)
@@ -198,6 +204,8 @@ void make_heap(int data[], size_t n)
 	}
 }
 
+int heapcomps = 0;
+
 void reheapify_down(int data[], size_t n)
 // Library facilities used: itemtool.h (from page 277), cstdlib
 {
@@ -214,30 +222,40 @@ void reheapify_down(int data[], size_t n)
 	{
 		// Compute the index of the larger child:
 		if (right_child(current) >= n)
+		{
 			// There is no right child, so left child must be largest
 			big_child_index = left_child(current);
+		}
 		else if (data[left_child(current)] > data[right_child(current)])
+		{
 			// The left child is the bigger of the two children
 			big_child_index = left_child(current);
+		}
 		else
+		{
 			// The right child is the bigger of the two children
 			big_child_index = right_child(current);
+		}
 
 		// Check whether the larger child is bigger than the current node. If so, then swap
 		// the current node with its bigger child and continue; otherwise we are finished.
+		heapcomps++;
 		if (data[current] < data[big_child_index])
 		{
 			swap(data[current], data[big_child_index]);
 			current = big_child_index;
 		}
 		else
+		{
 			heap_ok = true;
+		}
 	}
 }
 
-void heapsort(int data[], size_t n)
+int heapsort(int data[], size_t n)
 // Library facilities used: algorithm, cstdlib
 {
+	int comps = 0;
 	size_t unsorted;
 
 	make_heap(data, n);
@@ -250,8 +268,13 @@ void heapsort(int data[], size_t n)
 		swap(data[0], data[unsorted]);
 		reheapify_down(data, unsorted);
 	}
+
+	int heaptotal = heapcomps;
+	heapcomps = 0;
+	return heaptotal;
 }
 
+int mergecomps = 0;
 //MERGE SORT
 void merge(int data[], size_t n1, size_t n2)
 // Precondition: data is an array (or subarray) with at least n1 + n2 elements.
@@ -268,24 +291,34 @@ void merge(int data[], size_t n1, size_t n2)
 	size_t copied1 = 0; // Number copied from the first half of data
 	size_t copied2 = 0; // Number copied from the second half of data
 	size_t i;           // Array index to copy from temp back into data
-
 	// Allocate memory for the temporary dynamic array.
 	temp = new int[n1 + n2];
 
 	// Merge elements, copying from two halves of data to the temporary array.
 	while ((copied1 < n1) && (copied2 < n2))
 	{
+		mergecomps++;
 		if (data[copied1] < (data + n1)[copied2])
+		{
 			temp[copied++] = data[copied1++];        // Copy from first half
+		}
 		else
+		{
 			temp[copied++] = (data + n1)[copied2++]; // Copy from second half
+		}
 	}
 
 	// Copy any remaining entries in the left and right subarrays.
 	while (copied1 < n1)
+	{
+		mergecomps++;
 		temp[copied++] = data[copied1++];
+	}
 	while (copied2 < n2)
+	{
+		mergecomps++;
 		temp[copied++] = (data + n1)[copied2++];
+	}
 
 	// Copy from temp back to the data array, and release temp's memory.
 	for (i = 0; i < n1 + n2; i++)
@@ -293,7 +326,7 @@ void merge(int data[], size_t n1, size_t n2)
 	delete[] temp;
 }
 
-void mergesort(int data[], size_t n)
+int mergesort(int data[], size_t n)
 // Precondition: data is an array with at least n components.
 // Postcondition: The elements of data have been rearranged so
 // that data[0] <= data[1] <= ... <= data[n-1].
@@ -315,5 +348,9 @@ void mergesort(int data[], size_t n)
 		// Merge the two sorted halves.
 		merge(data, n1, n2);
 	}
+
+	int mergeTotal = mergecomps;
+	mergecomps = 0;
+	return mergeTotal;
 }
 

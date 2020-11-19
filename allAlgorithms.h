@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
+
 using namespace std;
 
 //SELECTION SORT
@@ -18,9 +19,9 @@ int bubbleSort(int array[], size_t size);
 int insertionSort(int arr[], size_t n);
 
 //QUICK SORT
-void partition(int data[], size_t n, size_t& pivot_index, int comparisons);
+int partition(int data[], size_t n, size_t& pivot_index, int comps);
 
-int quicksort(int data[], size_t n);
+int quicksort(int data[], size_t n, int comps);
 
 
 //HEAP SORT
@@ -37,10 +38,10 @@ void make_heap(int data[], size_t n);
 
 void reheapify_down(int data[], size_t n);
 
-void heapsort(int data[], size_t n);
+int heapsort(int data[], size_t n);
 
 //MERGE SORT
 void merge(int data[], size_t n1, size_t n2);
 
-void mergesort(int data[], size_t n);
+int mergesort(int data[], size_t n);
 

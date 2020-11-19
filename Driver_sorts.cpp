@@ -1,4 +1,4 @@
-
+/**
 #include "number_data.h"
 #include "allAlgorithms.h"
 #include <fstream>
@@ -7,6 +7,13 @@
 using namespace std;
 const unsigned int SIZE = 8000;
 
+int numbers[SIZE];
+int increasing[SIZE];
+int decreasing[SIZE];
+
+int numCopy[SIZE];
+int incCopy[SIZE];
+int decCopy[SIZE];
 void copyIntArray(int orig[], int copy[])
 {
 	for (int i = 0; i < SIZE; i++)
@@ -14,118 +21,180 @@ void copyIntArray(int orig[], int copy[])
 		copy[i] = orig[i];
 	}
 }
+void copyAllThoseArrays()
+{
+	copyIntArray(numbers, numCopy);
+	copyIntArray(increasing, incCopy);
+	copyIntArray(decreasing, decCopy);
+}
+
 
 int main()
 {
 	ofstream out;
 	out.open("sortsout.txt");
 
-	//declare original arrays
-	int numbers[SIZE];
-	int increasing[SIZE];
-	int decreasing[SIZE];
 	fill_random_numbers(numbers, SIZE);
 	fill_sorted_numbers(increasing, decreasing, SIZE);
 
+	copyAllThoseArrays();
 
-	//copy each type of array for each type of sorting function
-	//selection sort
-	int ssNumCopy[SIZE];
-	copyIntArray(numbers, ssNumCopy);
-	int ssIncCopy[SIZE];
-	copyIntArray(numbers, ssIncCopy);
-	int ssDecCopy[SIZE];
-	copyIntArray(numbers, ssDecCopy);
-
-	//bubble sort
-	int bsNumCopy[SIZE];
-	copyIntArray(numbers, bsNumCopy);
-	int bsIncCopy[SIZE];
-	copyIntArray(numbers, bsIncCopy);
-	int bsDecCopy[SIZE];
-	copyIntArray(numbers, bsDecCopy);
-	
-	//insertion sort
-	int isNumCopy[SIZE];
-	copyIntArray(numbers, isNumCopy);
-	int isIncCopy[SIZE];
-	copyIntArray(numbers, isIncCopy);
-	int isDecCopy[SIZE];
-	copyIntArray(numbers, isDecCopy);
-
-	// NOW apply sorting algorithms to a copy of each array or copy of a slice of the array.
+	// apply sorting algorithms to a copy of each array or copy of a slice of the array.
 	out << "Selection sort:" << endl;
 	//selection sort section
-	selectionsort(ssNumCopy, SIZE);
-	selectionsort(ssIncCopy, SIZE);
-	selectionsort(ssDecCopy, SIZE);
+	selectionsort(numCopy, SIZE);
+	selectionsort(incCopy, SIZE);
+	selectionsort(decCopy, SIZE);
 
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << ssNumCopy[i] << " ";
+		out << decCopy[i] << " ";
 	}
 	out << endl << endl;
 
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << ssIncCopy[i] << " ";
+		out << incCopy[i] << " ";
 	}
 	out << endl << endl;
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << ssDecCopy[i] << " ";
+		out << decCopy[i] << " ";
 	}
 	out << endl << endl;
+
+	copyAllThoseArrays();
 
 	//bubble sort section
 	out << "Bubble Sort: " << endl;
-	bubbleSort(bsNumCopy, SIZE);
-	bubbleSort(bsIncCopy, SIZE);
-	bubbleSort(bsDecCopy, SIZE);
+	bubbleSort(numCopy, SIZE);
+	bubbleSort(incCopy, SIZE);
+	bubbleSort(decCopy, SIZE);
 
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << bsNumCopy[i] << " ";
+		out << numCopy[i] << " ";
 	}
 	out << endl << endl;
 
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << bsIncCopy[i] << " ";
+		out << incCopy[i] << " ";
 	}
 	out << endl << endl;
 	
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << bsDecCopy[i] << " ";
+		out << decCopy[i] << " ";
 	}
-	out << endl << endl;;
+	out << endl << endl;
+
+	copyAllThoseArrays();
+
 
 	//insertion sort section
 	out << "Insertion Sort:" << endl;
-	insertionSort(isNumCopy, SIZE);
-	insertionSort(isIncCopy, SIZE);
-	insertionSort(isDecCopy, SIZE);
+	insertionSort(numCopy, SIZE);
+	insertionSort(incCopy, SIZE);
+	insertionSort(decCopy, SIZE);
 
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << isNumCopy[i] << " ";
+		out << numCopy[i] << " ";
 	}
 	out << endl << endl;
 
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << isIncCopy[i] << " ";
+		out << incCopy[i] << " ";
 	}
 	out << endl << endl;
 	for (int i = 0; i < SIZE; i++)
 	{
-		out << isDecCopy[i] << " ";
+		out << decCopy[i] << " ";
+	}
+	out << endl << endl;
+	copyAllThoseArrays();
+	
+
+	
+	//Quick Sort Section
+	out << "Quick Sort:" << endl;
+
+	//quicksort(numCopy, SIZE, 0);
+	//quicksort(incCopy, SIZE, 0);
+	//quicksort(decCopy, SIZE, 0);
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << numCopy[i] << " ";
 	}
 	out << endl << endl;
 
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << incCopy[i] << " ";
+	}
+	out << endl << endl;
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << decCopy[i] << " ";
+	}
+	out << endl << endl;
+	copyAllThoseArrays();
 
+	
+
+	//heap sort section
+	out << "Heap Sort:" << endl;
+	heapsort(numCopy, SIZE);
+	heapsort(incCopy, SIZE);
+	heapsort(decCopy, SIZE);
+
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << numCopy[i] << " ";
+	}
+	out << endl << endl;
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << incCopy[i] << " ";
+	}
+	out << endl << endl;
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << decCopy[i] << " ";
+	}
+	out << endl << endl;
+	copyAllThoseArrays();
+
+	//merge sort section
+	out << "Merge Sort:" << endl;
+	mergesort(numCopy, SIZE, 0);
+	mergesort(incCopy, SIZE, 0);
+	mergesort(decCopy, SIZE, 0);
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << numCopy[i] << " ";
+	}
+	out << endl << endl;
+
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << incCopy[i] << " ";
+	}
+	out << endl << endl;
+	for (int i = 0; i < SIZE; i++)
+	{
+		out << decCopy[i] << " ";
+	}
+	out << endl << endl;
+	copyAllThoseArrays();
 
 	out.close();
 	return 0;
 }
+*/
