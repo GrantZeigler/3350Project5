@@ -76,18 +76,19 @@ int insertionSort(int arr[], size_t n)
 		while (j >= 0 && arr[j] > key)
 		{
 			comps++;
-
 			arr[j + 1] = arr[j];
 			j = j - 1;
 		}
 		arr[j + 1] = key;
+		comps++;
 	}
 	return comps;
 }
 
 
 //QUICK SORT
-int quicksort(int data[], size_t n, int comps)
+int quickComps = 0;
+int quicksort(int data[], size_t n)
 // Library facilities used: cstdlib
 {
 	size_t pivot_index; // Array index for the pivot element
@@ -97,20 +98,20 @@ int quicksort(int data[], size_t n, int comps)
 	if (n > 1)
 	{
 		// Partition the array, and set the pivot index.
-		partition(data, n, pivot_index, comps);
+		partition(data, n, pivot_index);
 
 		// Compute the sizes of the subarrays.
 		n1 = pivot_index;
 		n2 = n - n1 - 1;
 
 		// Recursive calls will now sort the subarrays.
-		comps += quicksort(data, n1, comps);
-		comps += quicksort((data + pivot_index + 1), n2, comps);
+		quicksort(data, n1);
+		quicksort((data + pivot_index + 1), n2);
 	}
-	return comps;
+	return quickComps;
 }
 
-int partition(int data[], size_t n, size_t& pivot_index, int comps)
+void partition(int data[], size_t n, size_t& pivot_index)
 // Library facilities used: itemtool.h, stdlib.h
 //
 // NOTES FROM THE IMPLEMENTOR:
@@ -151,23 +152,25 @@ int partition(int data[], size_t n, size_t& pivot_index, int comps)
 			too_small_index--;
 		};
 
-		comps++;
 		if (too_big_index < too_small_index)
 		{ 
 			swap(data[too_big_index], data[too_small_index]);
+			quickComps++;
 		};
 	};
 
 	pivot_index = too_small_index;
 	data[0] = data[pivot_index];
 	data[pivot_index] = pivot;
-
-	return comps;
+	quickComps++;
 }
 
 
 
+
 //HEAP SORT
+int heapcomps = 0;
+
 size_t parent(size_t k)
 // Library facilities used: cstdlib
 {
@@ -203,8 +206,6 @@ void make_heap(int data[], size_t n)
 		}
 	}
 }
-
-int heapcomps = 0;
 
 void reheapify_down(int data[], size_t n)
 // Library facilities used: itemtool.h (from page 277), cstdlib
@@ -297,7 +298,6 @@ void merge(int data[], size_t n1, size_t n2)
 	// Merge elements, copying from two halves of data to the temporary array.
 	while ((copied1 < n1) && (copied2 < n2))
 	{
-		mergecomps++;
 		if (data[copied1] < (data + n1)[copied2])
 		{
 			temp[copied++] = data[copied1++];        // Copy from first half
@@ -322,7 +322,9 @@ void merge(int data[], size_t n1, size_t n2)
 
 	// Copy from temp back to the data array, and release temp's memory.
 	for (i = 0; i < n1 + n2; i++)
+	{
 		data[i] = temp[i];
+	}
 	delete[] temp;
 }
 
@@ -336,6 +338,7 @@ int mergesort(int data[], size_t n)
 	size_t n1; // Size of the first subarray
 	size_t n2; // Size of the second subarray
 
+
 	if (n > 1)
 	{
 		// Compute sizes of the subarrays.
@@ -348,9 +351,6 @@ int mergesort(int data[], size_t n)
 		// Merge the two sorted halves.
 		merge(data, n1, n2);
 	}
-
-	int mergeTotal = mergecomps;
-	mergecomps = 0;
-	return mergeTotal;
+	return mergecomps;
 }
 

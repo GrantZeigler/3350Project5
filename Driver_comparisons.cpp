@@ -94,9 +94,9 @@ int main()
 	out << "8000: 64000000 > 64000000 > 8000 > " << insertionSort(eightKRevCopy, 8000) << " > " << insertionSort(eightKRandCopy, 8000) << " > " << insertionSort(eightKAscendCopy, 8000) << endl;
 	
 	copyAllThoseArrays();
-	//out << "Quick Sort Information: " << endl;
-	//out << "1000: 3000 > 3000 > 3000 > " << quicksort(oneKRevCopy, 1000, 0) << " > " << quicksort(oneKRandCopy, 1000, 0) << endl;
-	//out << "2000: 6602 > 6602 > 6602 > " << quicksort(twoKRevCopy, 2000, 0) << " > " << quicksort(twoKRandCopy, 2000, 0) << endl;
+	out << "Quick Sort Information: " << endl;
+	out << "1000: 3000 > 3000 > 3000 > " << quicksort(oneKRevCopy, 1000) << " > " << quicksort(oneKRandCopy, 1000) << endl;
+	out << "2000: 6602 > 6602 > 6602 > " << quicksort(twoKRevCopy, 2000) << " > " << quicksort(twoKRandCopy, 2000) << endl;
 	//out << "4000: 14408 > 14408 > 14408 > " << quicksort(fourKRevCopy, 4000, 0) << " > " << quicksort(fourKRandCopy, 4000, 0) << endl;
 	//out << "8000: 31224 > 31224 > 31224 > " << quicksort(eightKRevCopy, 8000, 0) << " > " << quicksort(eightKRandCopy, 8000, 0) << " > " << quicksort(eightKAscendCopy, 8000, 1) << endl;
 

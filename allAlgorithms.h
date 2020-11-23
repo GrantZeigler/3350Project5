@@ -19,9 +19,9 @@ int bubbleSort(int array[], size_t size);
 int insertionSort(int arr[], size_t n);
 
 //QUICK SORT
-int partition(int data[], size_t n, size_t& pivot_index, int comps);
+void partition(int data[], size_t n, size_t& pivot_index);
 
-int quicksort(int data[], size_t n, int comps);
+int quicksort(int data[], size_t n);
 
 
 //HEAP SORT
