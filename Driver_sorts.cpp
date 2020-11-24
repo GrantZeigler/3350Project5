@@ -1,4 +1,4 @@
-/**
+
 #include "number_data.h"
 #include "allAlgorithms.h"
 #include <fstream>
@@ -116,14 +116,12 @@ int main()
 	out << endl << endl;
 	copyAllThoseArrays();
 	
-
-	
 	//Quick Sort Section
 	out << "Quick Sort:" << endl;
-
-	//quicksort(numCopy, SIZE, 0);
-	//quicksort(incCopy, SIZE, 0);
-	//quicksort(decCopy, SIZE, 0);
+	/*quick sort algorithm provided to us crashes on input larger than 3977 for some reason*/
+	quicksort(numCopy, 3977);
+	quicksort(incCopy, 3977);
+	quicksort(decCopy, 3977);
 
 	for (int i = 0; i < SIZE; i++)
 	{
@@ -172,9 +170,9 @@ int main()
 
 	//merge sort section
 	out << "Merge Sort:" << endl;
-	mergesort(numCopy, SIZE, 0);
-	mergesort(incCopy, SIZE, 0);
-	mergesort(decCopy, SIZE, 0);
+	mergesort(numCopy, SIZE);
+	mergesort(incCopy, SIZE);
+	mergesort(decCopy, SIZE);
 
 	for (int i = 0; i < SIZE; i++)
 	{
@@ -197,4 +195,3 @@ int main()
 	out.close();
 	return 0;
 }
-*/

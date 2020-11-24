@@ -39,12 +39,14 @@ int selectionsort(int data[], size_t n)
 int bubbleSort(int array[], size_t size) 
 {
 	int comparisons = 0;
+	int swaps = 0;
 	// run loops two times: one for walking throught the array
 	// and the other for comparison
 	for (int step = 0; step < size - 1; ++step) 
 	{
 		for (int i = 0; i < size - step - 1; ++i)
 		{
+			swaps = 0;
 			// To sort in descending order, change > to < in this line.
 			comparisons++;
 			if (array[i] > array[i + 1]) 
@@ -53,7 +55,12 @@ int bubbleSort(int array[], size_t size)
 				int temp = array[i];
 				array[i] = array[i + 1];
 				array[i + 1] = temp;
+				swaps = 1;
 			}
+		}
+		if (swaps == 0)
+		{
+			break;
 		}
 	}
 	return comparisons;
@@ -165,12 +172,8 @@ void partition(int data[], size_t n, size_t& pivot_index)
 	quickComps++;
 }
 
-
-
-
 //HEAP SORT
 int heapcomps = 0;
-
 size_t parent(size_t k)
 // Library facilities used: cstdlib
 {
@@ -239,8 +242,9 @@ void reheapify_down(int data[], size_t n)
 		}
 
 		// Check whether the larger child is bigger than the current node. If so, then swap
-		// the current node with its bigger child and continue; otherwise we are finished.
+		// the current node with its bigger child and continue; otherwise we are finished
 		heapcomps++;
+
 		if (data[current] < data[big_child_index])
 		{
 			swap(data[current], data[big_child_index]);
@@ -270,9 +274,10 @@ int heapsort(int data[], size_t n)
 		reheapify_down(data, unsorted);
 	}
 
-	int heaptotal = heapcomps;
+	int heapTotal = heapcomps;
 	heapcomps = 0;
-	return heaptotal;
+
+	return heapTotal;
 }
 
 int mergecomps = 0;
@@ -311,13 +316,13 @@ void merge(int data[], size_t n1, size_t n2)
 	// Copy any remaining entries in the left and right subarrays.
 	while (copied1 < n1)
 	{
-		mergecomps++;
 		temp[copied++] = data[copied1++];
+		mergecomps++;
 	}
 	while (copied2 < n2)
 	{
-		mergecomps++;
 		temp[copied++] = (data + n1)[copied2++];
+		mergecomps++;
 	}
 
 	// Copy from temp back to the data array, and release temp's memory.
